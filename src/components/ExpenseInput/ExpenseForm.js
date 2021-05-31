@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './ExpenseForm.css';
 
-const ExpenseForm = () => {
-    const [inputValue, setInputValue] = useState({title: '', amount: 0, date: new Date()});
+const ExpenseForm = ({ onSubmitExpense }) => {
+    const [inputValue, setInputValue] = useState({ title: '', amount: 0, date: new Date() });
 
     const handleInput = (event) => {
         setInputValue({
@@ -13,15 +13,16 @@ const ExpenseForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(inputValue);
-    }
+        onSubmitExpense(inputValue);
+    };
+
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={ handleSubmit }>
             <div className="new-expense__controls">
                 <div className="new-expense__control">
                     <label htmlFor="title">Title</label>
                     <input type="text"
-                           value={inputValue.title}
+                           value={ inputValue.title }
                            name="title"
                            id="title"
                            onChange={ handleInput }/>
@@ -31,7 +32,7 @@ const ExpenseForm = () => {
                     <input type="number"
                            name="amount"
                            id="amount"
-                           value={inputValue.amount}
+                           value={ inputValue.amount }
                            onChange={ handleInput }
                            min="0.00"
                            step="0.01"/>
@@ -41,8 +42,8 @@ const ExpenseForm = () => {
                     <input type="date"
                            name="date"
                            id="date"
-                           value={inputValue.date}
-                           onChange={handleInput}
+                           value={ inputValue.date }
+                           onChange={ handleInput }
                            min="2021-01-01"/>
                 </div>
             </div>
