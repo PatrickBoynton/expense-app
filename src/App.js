@@ -9,9 +9,14 @@ function App() {
         { id: 3, title: 'New Monitor', amount: 400.99, date: new Date(2021, 1, 12) },
     ];
 
+    const addExpense = expense => {
+        console.log('In App Js.');
+        console.log(expense);
+    };
+
     return (
         <>
-            <NewExpense/>
+            <NewExpense onAddExpense={ addExpense }/>
             <Expenses expenses={ expenses }/>
         </>
     );
