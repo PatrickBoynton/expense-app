@@ -13,7 +13,7 @@ const Expenses = ({ expenses }) => {
         <>
             <ExpenseFilter onChangeYear={ changeYear }/>
             <Card>
-                { expenses.map(expense => <ExpenseItem key={expense.id}
+                { expenses.filter(expense => expense.date.getFullYear().toString() === year).map(expense => <ExpenseItem key={expense.id}
                                                        year={ year }
                                                        expenses={ expense }/>) }
             </Card>
