@@ -9,13 +9,15 @@ const Expenses = ({ expenses }) => {
     const changeYear = (event) => {
         setYear(event.target.value);
     };
+    const filter = expenses.filter(expense => expense.date.getFullYear().toString() === year).map(expense =>
+        <ExpenseItem key={ expense.id }
+                     year={ year }
+                     expenses={ expense }/>);
     return (
         <>
             <ExpenseFilter onChangeYear={ changeYear }/>
             <Card>
-                { expenses.filter(expense => expense.date.getFullYear().toString() === year).map(expense => <ExpenseItem key={expense.id}
-                                                       year={ year }
-                                                       expenses={ expense }/>) }
+                { filter.length === 0 ? <h1>There are no items for this year.</h1> : filter }
             </Card>
         </>
     );
