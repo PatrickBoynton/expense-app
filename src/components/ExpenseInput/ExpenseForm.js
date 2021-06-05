@@ -3,6 +3,7 @@ import './ExpenseForm.css';
 
 const ExpenseForm = ({ onSubmitExpense }) => {
     const [inputValue, setInputValue] = useState({ title: '', amount: 0, date: new Date() });
+    const [editMode, setEditMode] = useState(false);
 
     const handleInput = (event) => {
         setInputValue({
@@ -16,8 +17,8 @@ const ExpenseForm = ({ onSubmitExpense }) => {
         onSubmitExpense(inputValue);
     };
 
-    return (
-        <form onSubmit={ handleSubmit }>
+    const form = (
+        <>
             <div className="new-expense__controls">
                 <div className="new-expense__control">
                     <label htmlFor="title">Title</label>
@@ -48,8 +49,20 @@ const ExpenseForm = ({ onSubmitExpense }) => {
                 </div>
             </div>
             <div className="new-expense__actions">
+                <button onClick={ () => setEditMode(false) }>Cancel</button>
                 <button type="submit">Add Expense</button>
             </div>
+        </>
+    );
+
+    const action =
+        (<div style={ { textAlign: 'center' } } className="new-expense__actions">
+            <button style={ {} } onClick={ () => setEditMode(true) }>Create Expense</button>
+        </div>);
+
+    return (
+        <form onSubmit={ handleSubmit }>
+            { editMode ? form : action }
         </form>
     );
 };
