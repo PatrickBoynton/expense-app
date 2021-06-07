@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ExpenseItem from './ExpenseItem/ExpenseItem';
 import Card from '../UI/Card';
 import ExpenseFilter from './ExpenseFilter/ExpenseFilter';
+import ExpensesChart from './ExpensesChart';
 
 const Expenses = ({ expenses }) => {
     const [year, setYear] = useState('');
@@ -14,12 +15,11 @@ const Expenses = ({ expenses }) => {
                      year={ year }
                      expenses={ expense }/>);
     return (
-        <>
+        <Card>
             <ExpenseFilter onChangeYear={ changeYear }/>
-            <Card>
-                { filter.length === 0 ? <h1>There are no items for this year.</h1> : filter }
-            </Card>
-        </>
+            <ExpensesChart expenses={ filter }/>
+            { filter.length === 0 ? <h1>There are no items for this year.</h1> : filter }
+        </Card>
     );
 };
 
